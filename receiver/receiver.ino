@@ -19,16 +19,12 @@ void setup()
 int recData(){
     uint8_t buf[RH_ASK_MAX_MESSAGE_LEN];
     uint8_t buflen = sizeof(buf);
-    if (driver.recv(buf, &buflen)) // Non-blocking
+    if (driver.recv(buf, 2)) // Non-blocking
     {
-      int i;
-      // Message with a good checksum received, dump it.
-//      Serial.print("Message: ");
-//      Serial.println(atoi((char *)buf));  
-//      servo.write(atoi((char *)buf));
-//      digitalWrite(8, 1); 
-      delay(500);
+      digitalWrite(8, 1); 
+      delay(100);
       digitalWrite(8, 0);
+      Serial.println((char *)buf);
       return atoi((char *)buf);
     }
     
