@@ -18,24 +18,17 @@ void sendData(const char data[sizeof(int)]){
   driver.send((uint8_t *)data, strlen(data));
   driver.waitPacketSent();
   digitalWrite(8, 1);
-  delay(1000);
+  delay(100);
   digitalWrite(8, 0);
 }
 
 void loop(){
-//  char data[20] = "LMAO";
-//  driver.send((uint8_t *)data, strlen(data));
-//  driver.waitPacketSent();
-//  delay(1000);
   val = analogRead(A0);
-  Serial.println(val);
   send_val = map(val, 0, 1023, 0, 180);
-//  const char data[sizeof(int)];
-//  memcpy((char *)data, &send_val, sizeof(int));
-//  Serial.println(data);
-//  Serial.println(send_val);
-//  Serial.println(val);
-//  sendData(data);
-//  delay(500);
+  const char data[sizeof(int)];
+  itoa(send_val, data, 10);
+  Serial.println(data);
+  sendData(data);
+  delay(100);
     
 }
